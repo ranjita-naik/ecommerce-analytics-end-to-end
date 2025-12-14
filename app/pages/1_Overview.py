@@ -8,8 +8,6 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
-from app.utils.sql_reader import run_query
-import streamlit as st
 
 import os
 import sys
@@ -22,6 +20,9 @@ print("DEBUG: Contents of cwd =", os.listdir(os.getcwd()))
 print("DEBUG: Parent 1 =", Path(__file__).resolve().parents[0])
 print("DEBUG: Parent 2 =", Path(__file__).resolve().parents[1])
 print("DEBUG: Parent 3 =", Path(__file__).resolve().parents[2])
+
+from app.utils.sql_reader import run_query
+import streamlit as st
 
 
 st.header("📈 Business Overview")
