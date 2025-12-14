@@ -1,14 +1,19 @@
-
 import sys
 from pathlib import Path
 
+# Determine repo root
 ROOT = Path(__file__).resolve().parents[2]
-if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))
 
+# Clean incorrect sys.path entries inserted by Streamlit
+BAD_PATHS = ["app", "app/app.py"]
+sys.path = [p for p in sys.path if p not in BAD_PATHS]
+
+# Add repo root to sys.path (must be first)
+sys.path.insert(0, str(ROOT))
+
+# Now imports work
 from app.utils.sql_reader import run_query
 import streamlit as st
-
 import plotly.express as px
 
 st.header("🧭 Order Funnel")
