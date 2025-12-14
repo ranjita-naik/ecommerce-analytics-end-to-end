@@ -1,0 +1,19 @@
+# macOS junk
+.DS_Store
+data/.DS_Store
+
+# Python bytecode
+__pycache__/
+
+# Raw data - DO NOT COMMIT
+data/raw/
+data/processed/
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Virtual env
+.venv/
+env/
+venv/
+
