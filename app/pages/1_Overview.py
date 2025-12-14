@@ -11,6 +11,19 @@ if str(ROOT) not in sys.path:
 from app.utils.sql_reader import run_query
 import streamlit as st
 
+import os
+import sys
+from pathlib import Path
+
+print("DEBUG: __file__ =", __file__)
+print("DEBUG: cwd =", os.getcwd())
+print("DEBUG: sys.path =", sys.path)
+print("DEBUG: Contents of cwd =", os.listdir(os.getcwd()))
+print("DEBUG: Parent 1 =", Path(__file__).resolve().parents[0])
+print("DEBUG: Parent 2 =", Path(__file__).resolve().parents[1])
+print("DEBUG: Parent 3 =", Path(__file__).resolve().parents[2])
+
+
 st.header("📈 Business Overview")
 
 with open("sql/kpis.sql") as f:
