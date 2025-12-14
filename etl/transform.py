@@ -59,3 +59,45 @@ def transform(dfs: dict) -> pd.DataFrame:
 
     return df
 
+
+def create_dim_customers(dfs):
+    customers = dfs["customers"].copy()
+    dim_customers = customers.rename(columns={
+        "customer_unique_id": "customer_unique_id",
+        "customer_city": "city",
+        "customer_state": "state",
+    })
+    dim_customers = dim_customers[["customer_id", "customer_unique_id", "city", "state"]]
+    return dim_customers
+
+
+def create_dim_products(dfs):
+    products = dfs["products"].copy()
+    dim_products = products[[
+        "product_id",
+        "product_category_name"
+    ]]
+    return dim_products
+
+
+def create_dim_time(df):
+    # Extract DATE only (drop timestamp)
+    df["order_date"] = df["order_purchase_timestamp"].dt.date
+
+    min_date = df["order_date"].min()
+    max_date = df["order_date"].max()
+
+    # Build proper date range (pure date, no time)
+    time_df = pd.DataFrame({
+        "date": pd.date_range(min_date, max_date)
+    })
+
+    time_df["date_key"] = time_df["date"].dt.strftime("%Y%m%d")
+    time_df["year"]     = time_df["date"].dt.year
+    time_df["month"]    = time_df["date"].dt.month
+    time_df["month_name"] = time_df["date"].dt.strftime("%B")
+    time_df["day"]      = time_df["date"].dt.day
+    time_df["weekday"]  = time_df["date"].dt.strftime("%A")
+
+    return time_df
+

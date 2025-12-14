@@ -33,3 +33,5 @@ This dashboard demonstrates a **production-style analytics workflow**:
 Designed to mirror real client engagements.
 """)
 
+st.sidebar.title("Navigation")
+st.sidebar.write("Use the Pages menu to explore Customer Insights")

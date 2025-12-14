@@ -25,3 +25,27 @@ CREATE TABLE fact_orders (
     purchase_month TEXT
 );
 
+-- Dim Customers
+CREATE TABLE dim_customers (
+    customer_id TEXT,
+    customer_unique_id TEXT,
+    city TEXT,
+    state TEXT
+);
+
+-- Dim Products
+CREATE TABLE dim_products (
+    product_id TEXT,
+    product_category_name TEXT
+);
+
+-- Dim Time
+CREATE TABLE dim_time (
+    date DATE,
+    date_key TEXT,
+    year INTEGER,
+    month INTEGER,
+    month_name TEXT,
+    day INTEGER,
+    weekday TEXT
+);
