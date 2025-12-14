@@ -1,9 +1,10 @@
-
-
 import sys
 from pathlib import Path
 
+# Path to repo root: /mount/src/ecommerce-analytics-end-to-end
 ROOT = Path(__file__).resolve().parents[2]
+
+# Add repo root to sys.path so Python can find the 'app' package
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 

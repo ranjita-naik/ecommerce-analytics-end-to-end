@@ -1,6 +1,8 @@
+
 import sys
 from pathlib import Path
 
+# app.py is inside app/, so parent is repo root
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))

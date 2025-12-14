@@ -1,3 +1,4 @@
+
 import sys
 from pathlib import Path
 
@@ -7,6 +8,7 @@ if str(ROOT) not in sys.path:
 
 from app.utils.sql_reader import run_query
 import streamlit as st
+
 import plotly.express as px
 
 st.header("🧭 Order Funnel")
