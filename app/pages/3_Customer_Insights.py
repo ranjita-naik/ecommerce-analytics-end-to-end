@@ -1,6 +1,9 @@
+
 import streamlit as st
 import plotly.express as px
+import pandas as pd     
 from app.utils.sql_reader import run_query
+
 
 st.header("🧑‍🤝‍🧑 Customer 360 Insights")
 
