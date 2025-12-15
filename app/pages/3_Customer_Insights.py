@@ -38,6 +38,9 @@ st.subheader("Customer Segmentation (Order Count vs Revenue)")
 with open("sql/customers_segmentation.sql") as f:
     df_seg = run_query(f.read())
 
+st.write("Segmentation dataframe preview:", df_seg.head())
+st.write("dtypes:", df_seg.dtypes)
+
 fig3 = px.scatter(
     df_seg,
     x="order_count",
