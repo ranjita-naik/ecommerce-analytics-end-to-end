@@ -41,15 +41,19 @@ with open("sql/customers_segmentation.sql") as f:
 st.write("Segmentation dataframe preview:", df_seg.head())
 st.write("dtypes:", df_seg.dtypes)
 
+
+plot_df = df_seg.drop(columns=["first_purchase", "last_purchase"], errors="ignore")
+
 fig3 = px.scatter(
-    df_seg,
+    plot_df,
     x="order_count",
     y="total_revenue",
     color="state",
     size="total_revenue",
-    hover_data=["customer_unique_id"],
+    hover_data=["customer_id", "order_count", "total_revenue", "avg_review"],
     title="Customer Segmentation: Frequency vs Revenue"
 )
+
 
 st.plotly_chart(fig3, use_container_width=True)
 
