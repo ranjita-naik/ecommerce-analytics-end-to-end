@@ -33,37 +33,34 @@ fig2 = px.bar(
 st.plotly_chart(fig2, use_container_width=True)
 
 
-st.subheader("Customer Segmentation (Order Count vs Revenue)")
+
+st.subheader("Customer Segmentation (Frequency vs Revenue)")
 
 with open("sql/customers_segmentation.sql") as f:
     df_seg = run_query(f.read())
 
-st.write("Segmentation dataframe preview:", df_seg.head())
-st.write("dtypes:", df_seg.dtypes)
+# Clean numeric columns
+df_seg["order_count"] = pd.to_numeric(df_seg["order_count"], errors="coerce")
+df_seg["total_revenue"] = pd.to_numeric(df_seg["total_revenue"], errors="coerce")
 
+# Remove rows that would break Plotly
+df_seg = df_seg.dropna(subset=["order_count", "total_revenue", "state"])
 
-plot_df = df_seg.drop(columns=["first_purchase", "last_purchase"], errors="ignore")
+# Safe fill for hover data
+df_seg["avg_review"] = df_seg["avg_review"].fillna(0)
 
-st.write("SEG FULL DF:", df_seg)
-st.write("SEG COLUMNS:", df_seg.columns.tolist())
-st.write("SEG N ROWS:", len(df_seg))
-st.write("SEG DATA TYPES:", df_seg.dtypes)
-st.write("UNIQUE STATES:", df_seg["state"].unique())
-st.write("ANY NULLS:", df_seg.isna().sum())
-
+# Build figure with safe columns only
 fig3 = px.scatter(
-    plot_df,
+    df_seg,
     x="order_count",
     y="total_revenue",
     color="state",
     size="total_revenue",
-    hover_data=["customer_id", "order_count", "total_revenue", "avg_review"],
+    hover_data=["customer_unique_id", "order_count", "total_revenue", "avg_review"],
     title="Customer Segmentation: Frequency vs Revenue"
 )
 
-
 st.plotly_chart(fig3, use_container_width=True)
-
 
 st.subheader("Customer Summary Metrics")
 
