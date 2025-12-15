@@ -44,6 +44,13 @@ st.write("dtypes:", df_seg.dtypes)
 
 plot_df = df_seg.drop(columns=["first_purchase", "last_purchase"], errors="ignore")
 
+st.write("SEG FULL DF:", df_seg)
+st.write("SEG COLUMNS:", df_seg.columns.tolist())
+st.write("SEG N ROWS:", len(df_seg))
+st.write("SEG DATA TYPES:", df_seg.dtypes)
+st.write("UNIQUE STATES:", df_seg["state"].unique())
+st.write("ANY NULLS:", df_seg.isna().sum())
+
 fig3 = px.scatter(
     plot_df,
     x="order_count",
